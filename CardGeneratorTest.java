@@ -8,17 +8,16 @@ public class CardGeneratorTest {
 
   @Before
   public void before(){
-    deck = CardGenerator.run();
+    deck = CardGenerator.getDeck();
+  }
+
+  @Test
+  public void makesDeckOf52(){
+    assertEquals(52, deck.size());
   }
 
   // @Test
-  // public void classMakesDeckOf52(){
-    
-  //   assertEquals(52, deck.size());
+  // public void createdCardsHavePrettyName(){
+  //   assertEquals("Two of Spades", deck.get(0).prettyName());
   // }
-
-  @Test
-  public void createdCardsHavePrettyName(){
-    assertEquals("Two of Spades", deck.get(0).prettyName());
-  }
 }
