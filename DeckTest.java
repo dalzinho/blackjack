@@ -4,8 +4,9 @@ import org.junit.Before;
 import java.util.ArrayList;
 
 public class DeckTest {
-  
+
   Deck deck;
+  Card card;
 
   @Before
   public void before(){
@@ -18,17 +19,24 @@ public class DeckTest {
   }
 
   @Test
-  public void hasGameValue(){
-    Card testCard1 = deck.cards.get(0);
-    Card testCard2 = deck.cards.get(12);
-    Card testCard3 = deck.cards.get(32);
-    Card testCard4 = deck.cards.get(43);
-
-    assertEquals(14, testCard1.gameValue());
-    assertEquals(14, testCard2.gameValue());
-    assertEquals(14, testCard3.gameValue());
-    assertEquals(14, testCard4.gameValue());
+  public void canSelectCardFromDeck(){
+    card = deck.removeCard();
+    assertEquals(51, deck.cards.size());
+    assertEquals("squeak", card.squeak());
   }
+
+  // @Test
+  // public void hasGameValue(){
+  //   Card testCard1 = deck.cards.get(0);
+  //   Card testCard2 = deck.cards.get(12);
+  //   Card testCard3 = deck.cards.get(32);
+  //   Card testCard4 = deck.cards.get(43);
+
+  //   assertEquals(14, testCard1.gameValue());
+  //   assertEquals(14, testCard2.gameValue());
+  //   assertEquals(14, testCard3.gameValue());
+  //   assertEquals(14, testCard4.gameValue());
+  // }
 
   // This test passed! But it's commented out, as the shuffle breaks it.
   // @Test

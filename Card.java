@@ -25,4 +25,8 @@ public class Card {
     this.gameValue = gv;
   }
 
+  public String squeak(){
+    return "squeak";
+  }
+
 }
