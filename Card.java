@@ -9,12 +9,20 @@ public class Card {
     this.gameValue = gameValue;
   }
 
+  public String getFaceValue(){
+    return this.faceValue;
+  }
+
   public String prettyName(){
     return this.faceValue + " of " + this.suit;
   }
 
   public int gameValue(){
     return this.gameValue;
+  }
+
+  public void setGameValue(int gv){
+    this.gameValue = gv;
   }
 
 }
