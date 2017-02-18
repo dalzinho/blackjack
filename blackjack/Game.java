@@ -25,6 +25,9 @@ public class Game {
       player2.takeCard(deck);
       player1.takeCard(deck);
       player2.takeCard(deck);
-
+      console.display("Player One has: " + player1.showCardsHeld());
+      console.display("Player Two has: " + player2.showCardsHeld());
+      result = decide(player1.getCardsTotalValue(), player2.getCardsTotalValue());
+      console.display(result);
   }
 } 

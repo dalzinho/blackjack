@@ -7,8 +7,6 @@ public class Runner{
     Player player2 = new Player();
     Console console = new Console();
 
-    player1.takeCard(deck);
-    player1.takeCard(deck);
-    console.display(player1.showCardsHeld());
+    game.start(player1, player2, deck, console);
   }
 }
