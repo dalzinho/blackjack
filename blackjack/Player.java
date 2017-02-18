@@ -4,9 +4,11 @@ public class Player {
 
   private ArrayList<Card> hand;
   private int cardsTotalValue;
+  private StringBuilder cardsHeld;
 
   public Player(){
     hand = new ArrayList<Card>();
+    cardsHeld = new StringBuilder();
   }
 
   public ArrayList<Card> getHand(){
@@ -24,6 +26,9 @@ public class Player {
   }
 
   public String showCardsHeld(){
-    return hand.get(0).prettyName();
+    for(Card card : hand){
+    cardsHeld.append(card.prettyName());
     }
+    return cardsHeld.toString();
+}
 }

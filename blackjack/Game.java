@@ -19,4 +19,12 @@ public class Game {
 
     return result;
   }
+
+  public void start(Player player1, Player player2, Deck deck, Console console){
+      player1.takeCard(deck);
+      player2.takeCard(deck);
+      player1.takeCard(deck);
+      player2.takeCard(deck);
+
+  }
 } 

@@ -31,4 +31,19 @@ public class PlayerTest {
     boolean x = ctv > 0 && ctv < 15;
     assertEquals(true, x);
   }
+
+  @Test
+  public void returnsPrettyNameForOneCard(){
+    player.takeCard(deck);
+    String test = player.showCardsHeld();
+    assertNotNull(test);
+  }
+
+  @Test
+  public void returnsPrettyNameForTwoCards(){
+    player.takeCard(deck);
+    player.takeCard(deck);
+    String test = player.showCardsHeld();
+    assertNotNull(test);
+  }
 }
