@@ -28,7 +28,9 @@ public class Player {
   public String showCardsHeld(){
     for(Card card : hand){
     cardsHeld.append(card.prettyName());
+    cardsHeld.append(", ");
     }
+    cardsHeld.append("Total Score: " + cardsTotalValue);
     return cardsHeld.toString();
 }
 }

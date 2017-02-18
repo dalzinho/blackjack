@@ -42,13 +42,13 @@ public class Deck {
         break;        
         case "Ten": card.setGameValue(10);
         break;        
-        case "Jack" : card.setGameValue(11);
+        case "Jack" : card.setGameValue(10);
         break;        
-        case "Queen": card.setGameValue(12);
+        case "Queen": card.setGameValue(10);
         break;
-        case "King" : card.setGameValue(13);
+        case "King" : card.setGameValue(10);
         break;
-        case "Ace": card.setGameValue(14);
+        case "Ace": card.setGameValue(11);
         break;
         
       }
