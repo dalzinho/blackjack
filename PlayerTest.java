@@ -1,28 +1,34 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 import org.junit.Before;
-
+import java.util.ArrayList;
 
 public class PlayerTest {
   
-  Dealer dealer;
   Player player;
   Deck deck;
+  ArrayList<Card> hand;
 
   @Before
   public void before(){
-    dealer = new Dealer();
     player = new Player();
     deck = new Deck();
   }
 
   @Test
-  public void takesCardFromDealer(){
-    dealer.takeCard(deck);
-    player.takeCard(dealer);
-    assertEquals(1, player.hand.size());
-    // assertEquals("squeak", player.takeCard(dealer));
+  public void takesCardFromDeck(){
+    player.takeCard(deck);
+    hand = player.getHand();
+    assertEquals(1, hand.size());
   }
 
-
+  @Test
+  public void canGetCardsTotal(){
+    player.takeCard(deck);
+    hand = player.getHand();
+    int ctv = player.getCardsTotalValue();
+    boolean x = ctv > 0 && ctv < 15;
+    assertEquals(true, x);
+  }
 }

@@ -17,7 +17,7 @@ public class Card {
     return this.faceValue + " of " + this.suit;
   }
 
-  public int gameValue(){
+  public int getGameValue(){
     return this.gameValue;
   }
 

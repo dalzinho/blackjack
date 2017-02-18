@@ -18,7 +18,7 @@ public class CardTest {
 
   @Test
   public void canShareGameValue(){
-    assertEquals(2, card.gameValue());
+    assertEquals(2, card.getGameValue());
   }
 
 }
