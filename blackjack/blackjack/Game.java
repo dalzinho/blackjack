@@ -32,6 +32,9 @@ public class Game {
     else if(player.evaluateHandForLoss()){
       result = "You are BUST!";
     }
+    else{
+      result = "";
+    }
     
     return result;
   }
@@ -76,14 +79,23 @@ public class Game {
     console.display(player2.showCardsHeld());
     takeTurn(player2, console, deck);
 
-    if (player1.getCardsTotalValue() < 21 && player2.getCardsTotalValue() < 21){
-      result = decide(player1.getCardsTotalValue(), player2.getCardsTotalValue());
-    }
-    
-    else if (player1.evaluateHandForWin() == player2.evaluateHandForWin()){
-      result = "draw";
-  }
+    int p1Score = player1.getCardsTotalValue();
+    int p2Score = player2.getCardsTotalValue();
 
-  console.display(result);
-}
+    if (p1Score > 21 && p2Score > 21){
+      result = "you are both BUST!";
+    }
+    else if (p1Score > 21 && p2Score <= 21){
+      result = "Player Two wins!";
+    }
+
+    else if (p1Score <= 21 && p2Score > 21){
+      result = "Player One Wins!";
+    }
+
+    else {
+      result = decide(p1Score, p2Score);
+    }
+    console.display(result);
+  }
 }

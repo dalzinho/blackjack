@@ -18,6 +18,14 @@ public class Player {
     this.cardsTotalValue = x;
   }
 
+  public void recalculateCardsTotalValue(){
+    int total = 0;
+    for(Card card : hand){
+      total += card.getGameValue();
+    }
+    this.cardsTotalValue = total;
+  }
+
   public ArrayList<Card> getHand(){
     return this.hand;
   }
@@ -27,6 +35,14 @@ public class Player {
   }
 
   public int getCardsTotalValue(){
+    if(this.cardsTotalValue > 21){
+      for (Card card : hand){
+        if (card.getFaceValue() == "Ace"){
+          card.setGameValue(1);
+        }
+      }
+      this.recalculateCardsTotalValue();
+    }
     return this.cardsTotalValue;
   }
 
