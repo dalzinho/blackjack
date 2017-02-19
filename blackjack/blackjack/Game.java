@@ -23,10 +23,10 @@ public class Game {
   }
 
   public String evaluateHand(Player player){
-    if (player.evaluateHandForNotBust()){
-      result = "Player One has: " + player.showCardsHeld();
-    }
-    else if(player.evaluateHandForWin()){
+    // if (player.evaluateHandForNotBust()){
+    //   result = "This player has: " + player.showCardsHeld();
+    // }
+    if(player.evaluateHandForWin()){
       result = "You have scored 21!";
     }
     else if(player.evaluateHandForLoss()){
@@ -39,7 +39,7 @@ public class Game {
   public void takeTurn(Player player, Console console, Deck deck){
     console.display(evaluateHand(player));
 
-    while (player.evaluateHandForNotBust() == true){
+    while (player.evaluateHandForNotBust() == true && player.evaluateHandForWin() == false){
       console.display("Would you like to (S)tick or (T)wist?");
       
 
@@ -64,15 +64,26 @@ public class Game {
     player1.takeCard(deck);
     player2.takeCard(deck);
 
+    console.display("====================");
+    console.display("| READY PLAYER ONE |");
+    console.display("====================");
+    console.display(player1.showCardsHeld());
     takeTurn(player1, console, deck);
+
+    console.display("====================");
+    console.display("| READY PLAYER TWO |");
+    console.display("====================");
+    console.display(player2.showCardsHeld());
     takeTurn(player2, console, deck);
 
-    if (player1.evaluateHandForLoss() == player2.evaluateHandForLoss()){
-      result = "draw";
-    }
-    else if (player1.evaluateHandForWin() == player2.evaluateHandForWin()){
-      result = "draw";
+    if (player1.getCardsTotalValue() < 21 && player2.getCardsTotalValue() < 21){
+      result = decide(player1.getCardsTotalValue(), player2.getCardsTotalValue());
     }
     
+    else if (player1.evaluateHandForWin() == player2.evaluateHandForWin()){
+      result = "draw";
   }
+
+  console.display(result);
+}
 }
