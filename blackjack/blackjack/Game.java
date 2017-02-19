@@ -23,30 +23,56 @@ public class Game {
   }
 
   public String evaluateHand(Player player){
-    if(player.evaluateHandForWin()){
+    if (player.evaluateHandForNotBust()){
+      result = "Player One has: " + player.showCardsHeld();
+    }
+    else if(player.evaluateHandForWin()){
       result = "You have scored 21!";
     }
     else if(player.evaluateHandForLoss()){
       result = "You are BUST!";
     }
-    else{
-      result = "Would you like to (S)tick or (T)wist?";
-    }
+    
     return result;
   }
 
+  public void takeTurn(Player player, Console console, Deck deck){
+    console.display(evaluateHand(player));
+
+    while (player.evaluateHandForNotBust() == true){
+      console.display("Would you like to (S)tick or (T)wist?");
+      
+
+      // ask console to return T or S
+      char response = console.twistOrStick();
+      //if response == T carry out taking a card and re-evaluating
+      if(response == 't'){
+        player.takeCard(deck);
+        console.display("You get the " + player.getLastCardInHand().prettyName() + ". Total Score: " + player.getCardsTotalValue());
+      }
+      else if(response == 's'){
+        break;
+      }
+      // else pass game to player two, leaving card total value intact. Break loop somehow, or change a variable in player?
+    }
+    console.display(evaluateHand(player));
+  }
 
   public void start(Player player1, Player player2, Deck deck, Console console){
-      player1.takeCard(deck);
-      player2.takeCard(deck);
-      player1.takeCard(deck);
-      player2.takeCard(deck);
-      console.display("Player One has: " + player1.showCardsHeld());
-      console.display(evaluateHand(player1));
-      while(player1.evaluateHandForNotBust() == true){
-        player1.takeCard(deck);
-        console.display("You get the " + player1.getLastCardInHand().prettyName() + ". Total Score: " + player1.getCardsTotalValue());
-      }
-      console.display(evaluateHand(player1));
+    player1.takeCard(deck);
+    player2.takeCard(deck);
+    player1.takeCard(deck);
+    player2.takeCard(deck);
+
+    takeTurn(player1, console, deck);
+    takeTurn(player2, console, deck);
+
+    if (player1.evaluateHandForLoss() == player2.evaluateHandForLoss()){
+      result = "draw";
+    }
+    else if (player1.evaluateHandForWin() == player2.evaluateHandForWin()){
+      result = "draw";
+    }
+    
   }
-} 
+}
