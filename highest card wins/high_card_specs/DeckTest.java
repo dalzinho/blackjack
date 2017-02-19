@@ -1,3 +1,5 @@
+import high_card.*;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.Before;
@@ -24,19 +26,6 @@ public class DeckTest {
     assertEquals(51, deck.cards.size());
     assertEquals("squeak", card.squeak());
   }
-
-  // @Test
-  // public void hasGameValue(){
-  //   Card testCard1 = deck.cards.get(0);
-  //   Card testCard2 = deck.cards.get(12);
-  //   Card testCard3 = deck.cards.get(32);
-  //   Card testCard4 = deck.cards.get(43);
-
-  //   assertEquals(14, testCard1.gameValue());
-  //   assertEquals(14, testCard2.gameValue());
-  //   assertEquals(14, testCard3.gameValue());
-  //   assertEquals(14, testCard4.gameValue());
-  // }
 
   // This test passed! But it's commented out, as the shuffle breaks it.
   // @Test

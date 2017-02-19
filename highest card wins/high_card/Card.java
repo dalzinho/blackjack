@@ -1,3 +1,5 @@
+package high_card;
+
 public class Card {
   String suit;
   String faceValue;

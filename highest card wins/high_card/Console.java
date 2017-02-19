@@ -1,3 +1,5 @@
+package high_card;
+
 public class Console {
 
   public void display(String text){
