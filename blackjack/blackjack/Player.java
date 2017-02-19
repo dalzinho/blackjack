@@ -22,6 +22,10 @@ public class Player {
     return this.hand;
   }
 
+  public Card getLastCardInHand(){
+    return this.hand.get(hand.size()-1);
+  }
+
   public int getCardsTotalValue(){
     return this.cardsTotalValue;
   }

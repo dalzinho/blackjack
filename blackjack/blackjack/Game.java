@@ -35,6 +35,7 @@ public class Game {
     return result;
   }
 
+
   public void start(Player player1, Player player2, Deck deck, Console console){
       player1.takeCard(deck);
       player2.takeCard(deck);
@@ -42,10 +43,10 @@ public class Game {
       player2.takeCard(deck);
       console.display("Player One has: " + player1.showCardsHeld());
       console.display(evaluateHand(player1));
-
-
-      console.display("Player Two has: " + player2.showCardsHeld());
-      result = decide(player1.getCardsTotalValue(), player2.getCardsTotalValue());
-      console.display(result);
+      while(player1.evaluateHandForNotBust() == true){
+        player1.takeCard(deck);
+        console.display("You get the " + player1.getLastCardInHand().prettyName() + ". Total Score: " + player1.getCardsTotalValue());
+      }
+      console.display(evaluateHand(player1));
   }
 } 
