@@ -27,6 +27,7 @@ public class Card {
     this.gameValue = gv;
   }
 
+  //this is an odd behaviour for a playing card, granted. It's just there to help with some of the tests! Call it an easter egg :)
   public String squeak(){
     return "squeak";
   }

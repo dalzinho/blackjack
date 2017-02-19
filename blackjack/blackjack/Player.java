@@ -13,6 +13,11 @@ public class Player {
     cardsHeld = new StringBuilder();
   }
 
+  // for testing purposes
+  public void setCardsTotalValue(int x){
+    this.cardsTotalValue = x;
+  }
+
   public ArrayList<Card> getHand(){
     return this.hand;
   }
@@ -29,10 +34,25 @@ public class Player {
 
   public String showCardsHeld(){
     for(Card card : hand){
-    cardsHeld.append(card.prettyName());
-    cardsHeld.append(", ");
+      cardsHeld.append(card.prettyName());
+      cardsHeld.append(", ");
     }
     cardsHeld.append("Total Score: " + cardsTotalValue);
     return cardsHeld.toString();
-}
+  }
+
+  public boolean evaluateHandForLoss() {
+    return cardsTotalValue > 21;
+  }
+
+  public boolean evaluateHandForWin() {
+    return cardsTotalValue == 21;
+  }
+
+  public boolean evaluateHandForNotBust() {
+    return cardsTotalValue < 21;
+  }
+
+
+
 }

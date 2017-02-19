@@ -48,4 +48,22 @@ public class PlayerTest {
     String test = player.showCardsHeld();
     assertNotNull(test);
   }
+
+  @Test
+  public void handOver21ReportsLoss(){
+    player.setCardsTotalValue(22);
+    assertEquals(true, player.evaluateHandForLoss());
+  }
+
+  @Test
+  public void handOf21ReportsWin(){
+    player.setCardsTotalValue(21);
+    assertEquals(true, player.evaluateHandForWin());
+  }
+
+  @Test
+  public void canEvaluateHandLessThan21(){
+    player.setCardsTotalValue(1);
+    assertEquals(true, player.evaluateHandForNotBust());
+  }
 }
