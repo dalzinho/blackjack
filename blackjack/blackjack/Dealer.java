@@ -1,3 +1,5 @@
+package blackjack;
+
 public class Dealer {
   
   private Card card;

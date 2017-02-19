@@ -1,3 +1,5 @@
+package blackjack;
+
 public class Card {
   String suit;
   String faceValue;
