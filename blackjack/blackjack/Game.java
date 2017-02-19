@@ -22,13 +22,26 @@ public class Game {
     return result;
   }
 
+  public String evaluateHand(Player player){
+    if(player.evaluateHandForWin()){
+      result = "You have scored 21!";
+    }
+    else if(player.evaluateHandForLoss()){
+      result = "You are BUST!";
+    }
+    else{
+      result = "Would you like to (S)tick or (T)wist?";
+    }
+    return result;
+  }
+
   public void start(Player player1, Player player2, Deck deck, Console console){
       player1.takeCard(deck);
       player2.takeCard(deck);
       player1.takeCard(deck);
       player2.takeCard(deck);
       console.display("Player One has: " + player1.showCardsHeld());
-      
+      console.display(evaluateHand(player1));
 
 
       console.display("Player Two has: " + player2.showCardsHeld());
