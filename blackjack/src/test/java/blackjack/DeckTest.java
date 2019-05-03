@@ -1,9 +1,9 @@
-import blackjack.*;
+package blackjack;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import org.junit.Test;
-import org.junit.Before;
-import java.util.ArrayList;
 
 public class DeckTest {
 
