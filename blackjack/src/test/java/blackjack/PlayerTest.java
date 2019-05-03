@@ -2,51 +2,69 @@ package blackjack;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
+@RunWith(MockitoJUnitRunner.class)
 public class PlayerTest {
-  
-  Player player;
-  Deck deck;
-  ArrayList<Card> hand;
+
+
+  // todo quite a bit of refactoring needed here
+  @Mock
+  private Deck deck;
+
+  private List<Card> hand;
+
+  private Player player;
 
   @Before
   public void before(){
     player = new Player();
-    deck = new Deck();
+    initMocks(this);
   }
 
   @Test
   public void takesCardFromDeck(){
-    player.takeCard(deck);
+    player.takeCard(deck.removeCard());
     hand = player.getHand();
     assertEquals(1, hand.size());
   }
 
+  // todo enums for suits and face values
   @Test
   public void canGetCardsTotal(){
-    player.takeCard(deck);
-    hand = player.getHand();
-    int ctv = player.getCardsTotalValue();
-    boolean x = ctv > 0 && ctv < 15;
-    assertEquals(true, x);
+    Card aceOfSpades = new Card("Spades", "Ace", 14);
+    Card fiveOfHearts = new Card("Hearts", "Five", 5);
+
+    when(deck.removeCard()).thenReturn(aceOfSpades);
+    player.takeCard(deck.removeCard());
+
+    when(deck.removeCard()).thenReturn(fiveOfHearts);
+    player.takeCard(deck.removeCard());
+    assertEquals(19, player.getCardsTotalValue());
   }
 
   @Test
   public void returnsPrettyNameForOneCard(){
-    player.takeCard(deck);
+    player.takeCard(deck.removeCard());
     String test = player.showCardsHeld();
     assertNotNull(test);
   }
 
   @Test
   public void returnsPrettyNameForTwoCards(){
-    player.takeCard(deck);
-    player.takeCard(deck);
+    player.takeCard(deck.removeCard());
+    player.takeCard(deck.removeCard());
     String test = player.showCardsHeld();
     assertNotNull(test);
   }

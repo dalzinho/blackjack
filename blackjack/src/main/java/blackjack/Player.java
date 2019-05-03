@@ -1,15 +1,22 @@
 package blackjack;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
 
-  private ArrayList<Card> hand;
+  private String name;
+  private List<Card> hand;
   private int cardsTotalValue;
   private StringBuilder cardsHeld;
 
+  public Player(String name) {
+    this();
+    this.name = name;
+  }
+
   public Player(){
-    hand = new ArrayList<Card>();
+    hand = new ArrayList<>();
     cardsHeld = new StringBuilder();
   }
 
@@ -26,7 +33,7 @@ public class Player {
     this.cardsTotalValue = total;
   }
 
-  public ArrayList<Card> getHand(){
+  public List<Card> getHand(){
     return this.hand;
   }
 
@@ -37,7 +44,7 @@ public class Player {
   public int getCardsTotalValue(){
     if(this.cardsTotalValue > 21){
       for (Card card : hand){
-        if (card.getFaceValue() == "Ace"){
+        if (card.getFaceValue().equals("Ace")) {
           card.setGameValue(1);
         }
       }
@@ -46,8 +53,7 @@ public class Player {
     return this.cardsTotalValue;
   }
 
-  public void takeCard(Deck deck){
-    Card card = deck.removeCard();
+  public void takeCard(Card card){
     this.hand.add(card);
     cardsTotalValue += card.getGameValue();
   }
@@ -73,6 +79,7 @@ public class Player {
     return cardsTotalValue < 21;
   }
 
-
-
+  public String getName() {
+    return name;
+  }
 }

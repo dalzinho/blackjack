@@ -1,10 +1,20 @@
 package blackjack;
 
+import blackjack.output.BlackjackGui;
+
 public class Game {
 
-  String result;
+  private final Player player1;
+  private final Player player2;
+  private final Deck deck;
+  private final BlackjackGui blackjackOutput;
+  private String result;
 
-  public Game(){
+  public Game(Player player1, Player player2, Deck deck, BlackjackGui blackjackOutput) {
+    this.player1 = player1;
+    this.player2 = player2;
+    this.deck = deck;
+    this.blackjackOutput = blackjackOutput;
     result = "";
   }
 
@@ -23,9 +33,7 @@ public class Game {
   }
 
   public String evaluateHand(Player player){
-    // if (player.evaluateHandForNotBust()){
-    //   result = "This player has: " + player.showCardsHeld();
-    // }
+
     if(player.evaluateHandForWin()){
       result = "You have scored 21!";
     }
@@ -39,45 +47,40 @@ public class Game {
     return result;
   }
 
-  public void takeTurn(Player player, Console console, Deck deck){
-    console.display(evaluateHand(player));
+  public void takeTurn(Player player){
 
-    while (player.evaluateHandForNotBust() == true && player.evaluateHandForWin() == false){
-      console.display("Would you like to (S)tick or (T)wist?");
+    blackjackOutput.displayBold("Ready " + player.getName());
+    blackjackOutput.display(player.showCardsHeld());
+    
+    blackjackOutput.display(evaluateHand(player));
+
+    while (player.evaluateHandForNotBust() && !player.evaluateHandForWin()){
+      blackjackOutput.display("Would you like to (S)tick or (T)wist?");
       
 
-      // ask console to return T or S
-      char response = console.twistOrStick();
+      // ask blackjackOutput to return T or S
+      char response = blackjackOutput.twistOrStick();
       //if response == T carry out taking a card and re-evaluating
       if(response == 't'){
-        player.takeCard(deck);
-        console.display("You get the " + player.getLastCardInHand().prettyName() + ". Total Score: " + player.getCardsTotalValue());
+        player.takeCard(deck.removeCard());
+        blackjackOutput.display("You get the " + player.getLastCardInHand().prettyName() + ". Total Score: " + player.getCardsTotalValue());
       }
       else if(response == 's'){
         break;
       }
       // else pass game to player two, leaving card total value intact. Break loop somehow, or change a variable in player?
     }
-    console.display(evaluateHand(player));
+    blackjackOutput.display(evaluateHand(player));
   }
 
-  public void start(Player player1, Player player2, Deck deck, Console console){
-    player1.takeCard(deck);
-    player2.takeCard(deck);
-    player1.takeCard(deck);
-    player2.takeCard(deck);
+  public void start(){
+    player1.takeCard(deck.removeCard());
+    player2.takeCard(deck.removeCard());
+    player1.takeCard(deck.removeCard());
+    player2.takeCard(deck.removeCard());
 
-    console.display("====================");
-    console.display("| READY PLAYER ONE |");
-    console.display("====================");
-    console.display(player1.showCardsHeld());
-    takeTurn(player1, console, deck);
-
-    console.display("====================");
-    console.display("| READY PLAYER TWO |");
-    console.display("====================");
-    console.display(player2.showCardsHeld());
-    takeTurn(player2, console, deck);
+    takeTurn(player1);
+    takeTurn(player2);
 
     int p1Score = player1.getCardsTotalValue();
     int p2Score = player2.getCardsTotalValue();
@@ -85,17 +88,17 @@ public class Game {
     if (p1Score > 21 && p2Score > 21){
       result = "you are both BUST!";
     }
-    else if (p1Score > 21 && p2Score <= 21){
+    else if (p1Score > 21) {
       result = "Player Two wins!";
     }
 
-    else if (p1Score <= 21 && p2Score > 21){
+    else if (p2Score > 21){
       result = "Player One Wins!";
     }
 
     else {
       result = decide(p1Score, p2Score);
     }
-    console.display(result);
+    blackjackOutput.display(result);
   }
 }
