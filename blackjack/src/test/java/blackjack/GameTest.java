@@ -1,5 +1,6 @@
 package blackjack;
 
+import blackjack.deck.Deck;
 import blackjack.output.BlackjackGui;
 import org.junit.Before;
 import org.junit.Test;

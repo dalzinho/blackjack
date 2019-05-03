@@ -1,6 +1,5 @@
-package blackjack;
+package blackjack.output;
 
-import blackjack.output.BlackjackGui;
 import org.apache.maven.shared.utils.StringUtils;
 
 import java.util.Scanner;
@@ -16,7 +15,6 @@ public class StdOutPrinter implements BlackjackGui {
     System.out.println(topAndBottom);
     System.out.println(emboldenText(text));
     System.out.println(topAndBottom);
-
   }
 
   private String emboldenText(String text) {

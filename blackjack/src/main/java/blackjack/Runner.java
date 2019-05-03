@@ -1,6 +1,8 @@
 package blackjack;
 
+import blackjack.deck.Deck;
 import blackjack.output.BlackjackGui;
+import blackjack.output.StdOutPrinter;
 
 public class Runner{
 

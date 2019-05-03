@@ -1,5 +1,6 @@
 package blackjack;
 
+import blackjack.deck.Deck;
 import blackjack.output.BlackjackGui;
 
 public class Game {
@@ -47,6 +48,7 @@ public class Game {
     return result;
   }
 
+  // todo fix game logic to stop at 21 :D :S
   public void takeTurn(Player player){
 
     blackjackOutput.displayBold("Ready " + player.getName());

@@ -1,5 +1,7 @@
 package blackjack;
 
+import blackjack.deck.Card;
+import blackjack.deck.Deck;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,13 +19,13 @@ public class DeckTest {
 
   @Test
   public void makesDeckOf52(){
-    assertEquals(52, deck.cards.size());
+    assertEquals(52, deck.cardsRemaining());
   }
 
   @Test
   public void canSelectCardFromDeck(){
     card = deck.removeCard();
-    assertEquals(51, deck.cards.size());
+    assertEquals(51, deck.cardsRemaining());
     assertEquals("squeak", card.squeak());
   }
 

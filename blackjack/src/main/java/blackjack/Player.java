@@ -1,5 +1,7 @@
 package blackjack;
 
+import blackjack.deck.Card;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,6 @@ public class Player {
   private String name;
   private List<Card> hand;
   private int cardsTotalValue;
-  private StringBuilder cardsHeld;
 
   public Player(String name) {
     this();
@@ -17,7 +18,6 @@ public class Player {
 
   public Player(){
     hand = new ArrayList<>();
-    cardsHeld = new StringBuilder();
   }
 
   // for testing purposes
@@ -41,29 +41,36 @@ public class Player {
     return this.hand.get(hand.size()-1);
   }
 
+  private int acesLowScore(List<Card> hand) {
+    return hand
+            .stream()
+            .mapToInt(card -> card.isAce() ? 1 : card.getGameValue())
+            .sum();
+  }
+
   public int getCardsTotalValue(){
-    if(this.cardsTotalValue > 21){
-      for (Card card : hand){
-        if (card.getFaceValue().equals("Ace")) {
-          card.setGameValue(1);
-        }
-      }
-      this.recalculateCardsTotalValue();
+    int totalValue = hand.stream()
+            .mapToInt(Card::getGameValue)
+            .sum();
+
+    if(totalValue > 21){
+      // todo aces low scenario
+      totalValue = acesLowScore(hand);
     }
-    return this.cardsTotalValue;
+    return totalValue;
   }
 
   public void takeCard(Card card){
     this.hand.add(card);
-    cardsTotalValue += card.getGameValue();
   }
 
   public String showCardsHeld(){
+    StringBuilder cardsHeld = new StringBuilder();
     for(Card card : hand){
       cardsHeld.append(card.prettyName());
       cardsHeld.append(", ");
     }
-    cardsHeld.append("Total Score: " + cardsTotalValue);
+    cardsHeld.append("Total Score: ").append(getCardsTotalValue());
     return cardsHeld.toString();
   }
 
