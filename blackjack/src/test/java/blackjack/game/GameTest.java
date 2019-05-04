@@ -1,4 +1,4 @@
-package blackjack;
+package blackjack.game;
 
 import blackjack.deck.Deck;
 import blackjack.game.Game;
@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -38,18 +39,8 @@ public class GameTest{
   }
 
   @Test
-  public void p1CanWin(){
-    assertEquals("Player One wins!", game.decide(2,1));
+  public void testBothPlayersBust() {
+    when(player1.getCardsTotalValue()).thenReturn(100);
+    when(player2.getCardsTotalValue()).thenReturn(100);
   }
-
-  @Test
-  public void p2CanWin(){
-    assertEquals("Player Two wins!", game.decide(1,2));
-  }
-
-  @Test
-  public void playersCanDraw(){
-    assertEquals("It's a Draw!", game.decide(1,1));
-  }
-
 }

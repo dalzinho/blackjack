@@ -10,18 +10,14 @@ public class Player {
 
   private static final String CARDS_HELD = "Cards Held: ";
   private static final String TOTAL_SCORE = "Total Score: ";
-  public static final String COMMA_SEPARATOR = ", ";
+  private static final String COMMA_SEPARATOR = ", ";
 
   private String name;
-  private List<Card> hand;
+  private List<Card> cards;
 
   public Player(String name) {
-    this.hand = new ArrayList<>();
+    this.cards = new ArrayList<>();
     this.name = name;
-  }
-
-  public String getPrettyNameOfLastCardInHand(){
-    return this.hand.get(hand.size()-1).prettyName();
   }
 
   private int acesLowScore(List<Card> hand) {
@@ -32,23 +28,23 @@ public class Player {
   }
 
   public int getCardsTotalValue(){
-    int totalValue = hand.stream()
+    int totalValue = cards.stream()
             .mapToInt(Card::getGameValue)
             .sum();
 
     if(totalValue > 21){
-      totalValue = acesLowScore(hand);
+      totalValue = acesLowScore(cards);
     }
 
     return totalValue;
   }
 
   public void addCardToHand(Card card){
-    this.hand.add(card);
+    this.cards.add(card);
   }
 
-  private String showCardsHeld(){
-    List<String> prettyNames = hand.stream().map(Card::prettyName).collect(Collectors.toList());
+  private String getCardPrettyNames(){
+    List<String> prettyNames = cards.stream().map(Card::prettyName).collect(Collectors.toList());
     return String.join(COMMA_SEPARATOR, prettyNames);
   }
 
@@ -65,7 +61,7 @@ public class Player {
   }
 
   public String getStatus() {
-    return CARDS_HELD + showCardsHeld() + "; " + TOTAL_SCORE + getCardsTotalValue();
+    return CARDS_HELD + getCardPrettyNames() + "; " + TOTAL_SCORE + getCardsTotalValue();
   }
 
 }

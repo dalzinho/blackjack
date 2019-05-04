@@ -1,4 +1,4 @@
-package blackjack;
+package blackjack.deck;
 
 import blackjack.deck.Card;
 import blackjack.deck.Deck;
