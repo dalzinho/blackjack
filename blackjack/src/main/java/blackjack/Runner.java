@@ -1,6 +1,8 @@
 package blackjack;
 
 import blackjack.deck.Deck;
+import blackjack.game.Game;
+import blackjack.player.Player;
 import blackjack.output.BlackjackGui;
 import blackjack.output.StdOutPrinter;
 

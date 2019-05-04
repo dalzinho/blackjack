@@ -1,6 +1,7 @@
-package blackjack;
+package blackjack.game;
 
 import blackjack.deck.Deck;
+import blackjack.player.Player;
 import blackjack.output.BlackjackGui;
 
 public class Game {
@@ -35,10 +36,10 @@ public class Game {
 
   public String evaluateHand(Player player){
 
-    if(player.evaluateHandForWin()){
+    if(player.hasTwentyOne()){
       result = "You have scored 21!";
     }
-    else if(player.evaluateHandForLoss()){
+    else if(player.isBust()){
       result = "You are BUST!";
     }
     else{
@@ -48,15 +49,14 @@ public class Game {
     return result;
   }
 
-  // todo fix game logic to stop at 21 :D :S
   public void takeTurn(Player player){
 
     blackjackOutput.displayBold("Ready " + player.getName());
-    blackjackOutput.display(player.showCardsHeld());
+    blackjackOutput.display(player.getStatus());
     
     blackjackOutput.display(evaluateHand(player));
 
-    while (player.evaluateHandForNotBust() && !player.evaluateHandForWin()){
+    while (!player.isBust() || !player.hasTwentyOne()){
       blackjackOutput.display("Would you like to (S)tick or (T)wist?");
       
 
@@ -64,8 +64,8 @@ public class Game {
       char response = blackjackOutput.twistOrStick();
       //if response == T carry out taking a card and re-evaluating
       if(response == 't'){
-        player.takeCard(deck.removeCard());
-        blackjackOutput.display("You get the " + player.getLastCardInHand().prettyName() + ". Total Score: " + player.getCardsTotalValue());
+        player.addCardToHand(deck.removeCard());
+        blackjackOutput.display("You get the " + player.getPrettyNameOfLastCardInHand() + ". Total Score: " + player.getCardsTotalValue());
       }
       else if(response == 's'){
         break;
@@ -76,10 +76,10 @@ public class Game {
   }
 
   public void start(){
-    player1.takeCard(deck.removeCard());
-    player2.takeCard(deck.removeCard());
-    player1.takeCard(deck.removeCard());
-    player2.takeCard(deck.removeCard());
+    player1.addCardToHand(deck.removeCard());
+    player2.addCardToHand(deck.removeCard());
+    player1.addCardToHand(deck.removeCard());
+    player2.addCardToHand(deck.removeCard());
 
     takeTurn(player1);
     takeTurn(player2);
