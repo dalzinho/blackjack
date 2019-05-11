@@ -9,7 +9,7 @@ import blackjack.output.StdOutPrinter;
 public class Runner{
 
   public static void main(String[] args) {
-    Deck deck = new Deck();
+    Deck deck = Deck.buildDeck();
     Player player1 = new Player("Player One");
     Player player2 = new Player("Player Two");
     BlackjackGui console = new StdOutPrinter();

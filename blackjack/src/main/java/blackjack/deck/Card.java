@@ -1,8 +1,5 @@
 package blackjack.deck;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.enums.EnumUtils;
-
 import static blackjack.deck.FaceValue.ACE;
 
 public class Card {
@@ -26,11 +23,6 @@ public class Card {
 
   public int getGameValue(){
     return this.faceValue.getGameValue();
-  }
-
-  //this is an odd behaviour for a playing card, granted. It's just there to help with some of the tests! Call it an easter egg :)
-  public String squeak(){
-    return "squeak";
   }
 
   public boolean isAce() {

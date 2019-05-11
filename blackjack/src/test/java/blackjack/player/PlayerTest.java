@@ -3,7 +3,6 @@ package blackjack.player;
 import blackjack.deck.Card;
 import blackjack.deck.Deck;
 import blackjack.deck.FaceValue;
-import blackjack.player.Player;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +22,6 @@ public class PlayerTest {
   private static final Card tenOfDiamonds = new Card(DIAMONDS, TEN);
   private static final Card fiveOfHearts = new Card(HEARTS, FaceValue.FIVE);
 
-  // todo quite a bit of refactoring needed here
   @Mock
   private Deck deck;
 

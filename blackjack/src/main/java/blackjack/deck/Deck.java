@@ -6,31 +6,37 @@ import java.util.List;
 
 public class Deck {
 
-  private final List<Card> cards;
+    private List<Card> cards;
 
-  public Deck() {
-    this.cards = new ArrayList<>();
-
-    for(Suit suit : Suit.values()){
-      for(FaceValue fv : FaceValue.values()){
-        Card card = new Card(suit, fv);
-        this.cards.add(card);
-        
-      }
+    private Deck() {
     }
 
-    Collections.shuffle(cards);
-  }
+    private Deck(List<Card> cards) {
+        this.cards = cards;
+    }
 
-  public Card removeCard(){
-    Card card = cards.get(0);
-    cards.remove(0);
-    return card;
-  }
+    public static Deck buildDeck() {
+        List<Card> cards = new ArrayList<>();
 
-  public int cardsRemaining() {
-    return cards.size();
-  }
+        for (Suit suit : Suit.values()) {
+            for (FaceValue fv : FaceValue.values()) {
+                Card card = new Card(suit, fv);
+                cards.add(card);
+            }
+        }
 
+        Collections.shuffle(cards);
 
+        return new Deck(cards);
+    }
+
+    public Card removeCard() {
+        if (cards.isEmpty()) {
+            throw new DeckException("Cannot remove card from empty deck!");
+        }
+
+        Card card = cards.get(0);
+        cards.remove(0);
+        return card;
+    }
 }

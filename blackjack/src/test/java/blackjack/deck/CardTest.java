@@ -1,6 +1,5 @@
 package blackjack.deck;
 
-import blackjack.deck.Card;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +16,6 @@ public class CardTest {
     card = new Card(HEARTS, TWO);
   }
 
-  // todo fix pretty names for enums
   @Test
   public void canWritePrettyName(){
     assertEquals("Two of Hearts", card.prettyName());
