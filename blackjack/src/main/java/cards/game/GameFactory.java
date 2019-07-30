@@ -1,6 +1,7 @@
 package cards.game;
 
 import cards.deck.Deck;
+import cards.deck.DeckException;
 import cards.game.blackjack.Blackjack;
 import cards.game.highcard.HighCard;
 import cards.output.CardsGui;
@@ -30,6 +31,8 @@ public class GameFactory {
             game = new Blackjack(player1, player2, deck, cardsGui);
         } else if (selection =='h') {
             game = new HighCard(player1, player2, deck, cardsGui);
+        } else if (selection == 'q') {
+            throw new DeckException("user disnae want to play any more");
         } else {
             cardsGui.display("error");
             return selectGame();

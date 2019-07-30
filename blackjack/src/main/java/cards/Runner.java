@@ -1,6 +1,7 @@
 package cards;
 
 import cards.deck.Deck;
+import cards.deck.DeckException;
 import cards.game.GameFactory;
 import cards.hand.Hand;
 import cards.output.CardsGui;
@@ -15,12 +16,21 @@ public class Runner{
     Player player2 = new Player("Player Two", new Hand());
     CardsGui console = new StdOutPrinter();
 
-    while (true) {
-        GameFactory gameFactory = new GameFactory(player1, player2, deck, console);
-        gameFactory.selectGame().start();
+      GameFactory gameFactory = new GameFactory(player1, player2, deck, console);
 
-        player1.clearHand();
-        player2.clearHand();
+      boolean loopActive = true;
+
+      while (loopActive) {
+          try {
+              gameFactory.selectGame().start();
+
+              player1.clearHand();
+              player2.clearHand();
+          } catch (DeckException e) {
+              console.display(e.getMessage());
+              console.display("cheerio");
+              loopActive = false;
+          }
     }
   }
 }
