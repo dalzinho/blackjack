@@ -1,13 +1,11 @@
 package cards;
 
 import cards.deck.Deck;
-import cards.game.Game;
-import cards.game.blackjack.Blackjack;
-import cards.game.highcard.HighCard;
+import cards.game.GameFactory;
 import cards.hand.Hand;
-import cards.player.Player;
 import cards.output.CardsGui;
 import cards.output.StdOutPrinter;
+import cards.player.Player;
 
 public class Runner{
 
@@ -17,14 +15,12 @@ public class Runner{
     Player player2 = new Player("Player Two", new Hand());
     CardsGui console = new StdOutPrinter();
 
-      Game blackjack = new Blackjack(player1, player2, deck, console);
+    while (true) {
+        GameFactory gameFactory = new GameFactory(player1, player2, deck, console);
+        gameFactory.selectGame().start();
 
-      blackjack.start();
-      player1.clearHand();
-      player2.clearHand();
-      deck = Deck.buildDeck();
-
-      Game highCard = new HighCard(player1, player2, deck, console);
-      highCard.start();
+        player1.clearHand();
+        player2.clearHand();
+    }
   }
 }

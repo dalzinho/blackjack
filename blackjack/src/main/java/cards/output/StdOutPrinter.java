@@ -31,7 +31,7 @@ public class StdOutPrinter implements CardsGui {
     System.out.println(text);
   }
 
-  public char twistOrStick(){
+  public char readCharFromCommandLine(){
     Scanner sc = new Scanner(System.in);
     String data = sc.nextLine();
     return data.charAt(0);

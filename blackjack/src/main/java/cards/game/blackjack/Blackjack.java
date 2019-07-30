@@ -41,7 +41,7 @@ public class Blackjack extends Game {
     while (!player.isBust() && !player.hasTwentyOne()){
       console.display("Would you like to (S)tick or (T)wist?");
 
-      char response = console.twistOrStick();
+      char response = console.readCharFromCommandLine();
 
       if(response == TWIST){
         Card nextCard = deck.removeCard();

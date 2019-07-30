@@ -6,12 +6,12 @@ import cards.player.Player;
 
 public abstract class Game {
 
-    protected final Player player1;
-    protected final Player player2;
-    protected final Deck deck;
-    protected final CardsGui console;
+    protected Player player1;
+    protected Player player2;
+    protected Deck deck;
+    protected CardsGui console;
 
-    public Game(Player player1, Player player2, Deck deck, CardsGui console){
+    public Game(Player player1, Player player2, Deck deck, CardsGui console) {
         this.player1 = player1;
         this.player2 = player2;
         this.deck = deck;

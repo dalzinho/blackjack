@@ -39,7 +39,7 @@ public class BlackjackTest {
 
   @Test
   public void testDealCausesEachPlayerToGetTwoCards() {
-    when(gui.twistOrStick()).thenReturn('s');
+    when(gui.readCharFromCommandLine()).thenReturn('s');
     blackjack.start();
     verify(player1, times(2)).addCardToHand(any());
     verify(player2, times(2)).addCardToHand(any());
@@ -47,7 +47,7 @@ public class BlackjackTest {
 
   @Test
   public void testTwistLogic() {
-    when(gui.twistOrStick()).thenReturn('t', 's');
+    when(gui.readCharFromCommandLine()).thenReturn('t', 's');
     when(deck.removeCard()).thenReturn(Deck.buildDeck().removeCard());
     blackjack.start();
     verify(deck, atLeastOnce()).removeCard();

@@ -6,6 +6,5 @@ public interface CardsGui {
 
     void display(String text);
 
-    char twistOrStick();
-
+    char readCharFromCommandLine();
 }
