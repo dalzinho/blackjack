@@ -3,6 +3,7 @@ package cards.game.blackjack;
 import cards.deck.Card;
 import cards.deck.Deck;
 import cards.game.Game;
+import cards.output.SysInReader;
 import cards.player.Player;
 import cards.output.CardsGui;
 
@@ -14,8 +15,8 @@ public class Blackjack extends Game {
   private static final char TWIST = 't';
   private static final char STICK = 's';
 
-  public Blackjack(Player player1, Player player2, Deck deck, CardsGui console) {
-    super(player1, player2, deck, console);
+  public Blackjack(Player player1, Player player2, Deck deck, CardsGui console, SysInReader sysInReader) {
+    super(player1, player2, deck, console, sysInReader);
   }
 
   @Override
@@ -41,7 +42,7 @@ public class Blackjack extends Game {
     while (!player.isBust() && !player.hasTwentyOne()){
       console.display("Would you like to (S)tick or (T)wist?");
 
-      char response = console.readCharFromCommandLine();
+      char response = sysInReader.readCharFromCommandLine();
 
       if(response == TWIST){
         Card nextCard = deck.removeCard();

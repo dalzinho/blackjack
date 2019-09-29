@@ -3,12 +3,13 @@ package cards.game.highcard;
 import cards.deck.Deck;
 import cards.game.Game;
 import cards.output.CardsGui;
+import cards.output.SysInReader;
 import cards.player.Player;
 
 public class HighCard extends Game {
 
-  public HighCard(Player player1, Player player2, Deck deck, CardsGui console){
-    super(player1, player2, deck, console);
+  public HighCard(Player player1, Player player2, Deck deck, CardsGui console, SysInReader sysInReader){
+    super(player1, player2, deck, console, sysInReader);
   }
 
   @Override

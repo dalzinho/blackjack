@@ -3,6 +3,7 @@ package highcard;
 import cards.deck.Deck;
 import cards.game.highcard.HighCard;
 import cards.output.CardsGui;
+import cards.output.SysInReader;
 import cards.player.Player;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,8 +27,11 @@ public class GameTest{
   @Mock
   Deck deck;
 
+  @Mock
+  SysInReader sysInReader;
+
   @InjectMocks
-  HighCard highCard = new HighCard(player1, player2, deck, gui);
+  HighCard highCard = new HighCard(player1, player2, deck, gui, sysInReader);
 
   @Before
   public void before(){

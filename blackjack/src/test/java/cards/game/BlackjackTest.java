@@ -3,6 +3,7 @@ package cards.game;
 import cards.deck.Deck;
 import cards.game.blackjack.Blackjack;
 import cards.output.CardsGui;
+import cards.output.SysInReader;
 import cards.player.Player;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,8 +30,11 @@ public class BlackjackTest {
   @Mock
   CardsGui gui;
 
+  @Mock
+  SysInReader sysInReader;
+
   @InjectMocks
-  Blackjack blackjack = new Blackjack(player1, player2, deck, gui);
+  Blackjack blackjack = new Blackjack(player1, player2, deck, gui, sysInReader);
 
   @Before
   public void before(){
@@ -39,7 +43,7 @@ public class BlackjackTest {
 
   @Test
   public void testDealCausesEachPlayerToGetTwoCards() {
-    when(gui.readCharFromCommandLine()).thenReturn('s');
+    when(sysInReader.readCharFromCommandLine()).thenReturn('s');
     blackjack.start();
     verify(player1, times(2)).addCardToHand(any());
     verify(player2, times(2)).addCardToHand(any());
@@ -47,7 +51,7 @@ public class BlackjackTest {
 
   @Test
   public void testTwistLogic() {
-    when(gui.readCharFromCommandLine()).thenReturn('t', 's');
+    when(sysInReader.readCharFromCommandLine()).thenReturn('t', 's');
     when(deck.removeCard()).thenReturn(Deck.buildDeck().removeCard());
     blackjack.start();
     verify(deck, atLeastOnce()).removeCard();

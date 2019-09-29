@@ -2,6 +2,7 @@ package cards.output;
 
 import org.apache.maven.shared.utils.StringUtils;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class StdOutPrinter implements CardsGui {
@@ -9,12 +10,18 @@ public class StdOutPrinter implements CardsGui {
   private static final String BOX_TEXT_PREFIX = "| ";
   private static final String BOX_TEXT_SUFFIX = " |";
 
+  private PrintStream printStream;
+
+  public StdOutPrinter(PrintStream printStream) {
+    this.printStream = printStream;
+  }
+
   @Override
   public void displayBold(String text) {
     String topAndBottom = getBoxLine(text.length());
-    System.out.println(topAndBottom);
-    System.out.println(emboldenText(text));
-    System.out.println(topAndBottom);
+    printStream.println(topAndBottom);
+    printStream.println(emboldenText(text));
+    printStream.println(topAndBottom);
   }
 
   private String emboldenText(String text) {
@@ -28,12 +35,6 @@ public class StdOutPrinter implements CardsGui {
   }
 
   public void display(String text){
-    System.out.println(text);
-  }
-
-  public char readCharFromCommandLine(){
-    Scanner sc = new Scanner(System.in);
-    String data = sc.nextLine();
-    return data.charAt(0);
+    printStream.println(text);
   }
 }
